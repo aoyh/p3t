@@ -1,0 +1,2535 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Sex, Race, and Occupation &#8212; p3 1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sex, Race, and Education" href="demographics-p3.html" />
+    <link rel="prev" title="Cleaning the Data" href="demographics-p1.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 8ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [117]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>%matplotlib inline
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import shelve
+import os
+import scipy.stats as stats
+from itertools import combinations
+plt.style.use(&#39;seaborn-dark&#39;)
+plt.rcParams[&#39;figure.figsize&#39;] = (20, 12)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>clean_adult = pd.read_hdf(&#39;results/df1.h5&#39;, &#39;clean_adult/&#39;)
+clean_adult.head()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>age</th>
+      <th>workclass</th>
+      <th>fnlwgt</th>
+      <th>education</th>
+      <th>education.num</th>
+      <th>marital.status</th>
+      <th>occupation</th>
+      <th>relationship</th>
+      <th>race</th>
+      <th>sex</th>
+      <th>capital.gain</th>
+      <th>capital.loss</th>
+      <th>hours.per.week</th>
+      <th>native.country</th>
+      <th>income</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>82</td>
+      <td>Private</td>
+      <td>132870</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Widowed</td>
+      <td>Exec-managerial</td>
+      <td>Not-in-family</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>4356</td>
+      <td>18</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>54</td>
+      <td>Private</td>
+      <td>140359</td>
+      <td>7th-8th</td>
+      <td>4</td>
+      <td>Divorced</td>
+      <td>Machine-op-inspct</td>
+      <td>Unmarried</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>3900</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>41</td>
+      <td>Private</td>
+      <td>264663</td>
+      <td>Some-college</td>
+      <td>10</td>
+      <td>Separated</td>
+      <td>Prof-specialty</td>
+      <td>Own-child</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>3900</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>34</td>
+      <td>Private</td>
+      <td>216864</td>
+      <td>HS-grad</td>
+      <td>9</td>
+      <td>Divorced</td>
+      <td>Other-service</td>
+      <td>Unmarried</td>
+      <td>White</td>
+      <td>Female</td>
+      <td>0</td>
+      <td>3770</td>
+      <td>45</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>38</td>
+      <td>Private</td>
+      <td>150601</td>
+      <td>10th</td>
+      <td>6</td>
+      <td>Separated</td>
+      <td>Adm-clerical</td>
+      <td>Unmarried</td>
+      <td>White</td>
+      <td>Male</td>
+      <td>0</td>
+      <td>3770</td>
+      <td>40</td>
+      <td>United-States</td>
+      <td>&lt;=50K</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="section" id="Sex,-Race,-and-Occupation">
+<h1>Sex, Race, and Occupation<a class="headerlink" href="#Sex,-Race,-and-Occupation" title="Permalink to this headline">¶</a></h1>
+<p>We are interested in whether or not different sexes and/or races choose
+different occupations. We will first look at sex.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>female = clean_adult[clean_adult[&quot;sex&quot;] == &quot;Female&quot;]
+male = clean_adult[clean_adult[&quot;sex&quot;] == &quot;Male&quot;]
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [173]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+
+
+<span></span># g = sns.factorplot(x=&quot;sex&quot;, y=&quot;occupation&quot;, data=clean_adult,
+#                    size=2, kind=&quot;bar&quot;, palette=&quot;muted&quot;)
+# g.despine(left=True)
+# g.set_ylabels(&quot;survival probability&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>fig, axes = plt.subplots(nrows=1, ncols=2)
+ax1 = axes[0]
+counts = female[&quot;occupation&quot;].value_counts().sort_index()
+percents = 100 * counts.values/counts.values.sum()
+patches, texts = ax1.pie(percents, shadow=True, startangle=90)
+ax1.axis(&quot;equal&quot;)
+labels = [&#39;{0} - {1:1.2f} %&#39;.format(i,j) for i,j in zip(counts.index, percents)]
+ax1.legend(patches, labels, loc=&quot;center&quot;, bbox_to_anchor=(-0.24, 0.5),
+           fontsize=10)
+ax1.set_title(&quot;Female Occupation&quot;, y = 0.95)
+
+ax2 = axes[1]
+counts = male[&quot;occupation&quot;].value_counts().sort_index()
+#Drop Armed Forces and append to end so that occupations match
+armed_forces = counts[&quot;Armed-Forces&quot;]
+counts = counts.drop(&quot;Armed-Forces&quot;)
+counts[&quot;Armed-Forces&quot;] = armed_forces
+percents = 100 * counts.values/counts.values.sum()
+patches, texts = ax2.pie(percents, shadow=True, startangle=90)
+ax2.axis(&quot;equal&quot;)
+labels = [&#39;{0} - {1:1.2f} %&#39;.format(i,j) for i,j in zip(counts.index, percents)]
+ax2.legend(patches, labels, loc=&quot;center&quot;, bbox_to_anchor=(1.25, 0.5),
+           fontsize=10)
+ax2.set_title(&quot;Male Occupation&quot;, y = 0.95)
+fig.savefig(&quot;fig/occupation_by_sex.png&quot;)
+
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/demographics-p2_5_0.png" src="_images/demographics-p2_5_0.png" />
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>plt.bar(r, greenBars, color=&#39;#b5ffb9&#39;, edgecolor=&#39;white&#39;, width=barWidth)
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [143]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>races_groups = clean_adult.groupby(&quot;race&quot;)
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [171]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>s = set()
+s.add(1)
+s2 = set()
+s2.add(1)
+s2.add(2)
+s.union(s2)
+s
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[171]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>{1}
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>def plot_pie(data, groupby_columns, plot_column):
+    groups = data.groupby(groupby_columns)
+    nrows = round((len(groups) + 0.0001)/2)
+    fig, axes = plt.subplots(nrows=nrows, ncols=2)
+    row = 0
+    column = 0
+    unique_values = data[plot_column].unique()
+    #Get all values which not all groups contain
+    s = set()
+    for name, group in groups:
+        for value in unique_values:
+            if value not in group[plot_column].unique():
+                s.add(value)
+    for name, group in groups:
+        if nrows &gt; 1:
+            ax = axes[row, column]
+        else:
+            ax = axes[column]
+        counts = group[plot_column].value_counts().sort_index()
+        for value in s:
+        #Drop values which not all groups contain and append to end so that occupations match
+            if value in counts.index:
+                dropped_value = counts[value]
+                counts = counts.drop(value)
+                counts[value] = dropped_value
+        percents = 100 * counts.values/counts.values.sum()
+        patches, texts = ax.pie(percents, shadow=True, startangle=90)
+        ax.axis(&quot;equal&quot;)
+        labels = [&#39;{0} - {1:1.2f} %&#39;.format(i,j) for i,j in zip(counts.index, percents)]
+        if column == 0:
+            ax.legend(patches, labels, loc=&quot;center&quot;, bbox_to_anchor=(-0.4, 0.5), ncol = 2,
+                       fontsize=13)
+        else:
+            ax.legend(patches, labels, loc=&quot;center&quot;, bbox_to_anchor=(1.4, 0.5), ncol = 2,
+                       fontsize=13)
+        ax.set_title(&quot;&quot;.join(name) + &quot; &quot; + plot_column, y = 0.95, fontsize=15)
+
+        #if column = 0, then it is next 1. If column = 1, then it is next 0
+        column = 1 - column
+        #move on to next row
+        if column == 0:
+            row += 1
+    #if odd number of plots, hide last axis
+    if column == 1:
+        axes[-1, -1].axis(&quot;off&quot;)
+    fig.savefig(&quot;fig/&quot; + plot_column + &quot;_by_&quot; + &quot;&quot;.join(groupby_columns) + &quot;.png&quot;, bbox_inches=&#39;tight&#39;)
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>plot_pie(clean_adult, &quot;sex&quot;, &quot;occupation&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/demographics-p2_10_0.png" src="_images/demographics-p2_10_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>plot_pie(clean_adult, &quot;race&quot;, &quot;occupation&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/demographics-p2_11_0.png" src="_images/demographics-p2_11_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>plot_pie(clean_adult, [&quot;race&quot;, &quot;sex&quot;], &quot;occupation&quot;)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/demographics-p2_12_0.png" src="_images/demographics-p2_12_0.png" />
+</div>
+</div>
+<p>Small side note: While doing this project, we found an interesting
+property regarding the <code class="docutils literal"><span class="pre">round()</span></code> function, in which by default this
+function actually rounds half numbers to the nearest even number. This
+is called bankers rounding:
+<a class="reference external" href="https://stackoverflow.com/questions/33019698/how-to-properly-round-up-half-float-numbers-in-python">https://stackoverflow.com/questions/33019698/how-to-properly-round-up-half-float-numbers-in-python</a>.
+We found this out when we were not getting the correct number of rows
+for our subplots.</p>
+<p>Now that we saw all the “pretty” graphs, let’s do some hypothesis
+testing. We are interested in using the Chi-Square Test of Independence,
+which is used to determine whether there is an association between two
+categorical variables. The test procedure is appropriate when the
+following conditions are met: * The sampling method is simple random
+sampling. * The variables under study are each categorical. * If
+sample data are displayed in a contingency table, the expected frequency
+count for each cell of the table is at least 5.</p>
+<p>The last condition poses a problem, as there are some occupations in
+which there is a group that has no members in the occupation. Thus, we
+will have to proceed with caution. However, we also believe at the same
+time that if the expected frequency count for a cell is less than 5,
+then there is an obvious relationship between the categorical variables.
+We are interested in the pairwise group relationships (i.e. white/black,
+white/asian. etc.), so we will run chi-square for each pair in a group.</p>
+<p>Of course, we cannot say that there is any causal relationship between
+groups and occupations, as there are many other confounding variables
+such as education, which we will look at in another notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span># %load find_indices_with_value.py
+def find_indices_with_value(df, value):
+    &quot;&quot;&quot;Return the row indices of a Pandas Dataframe where the row contains the given value.
+
+    Parameters
+    ----------
+
+    df: Pandas Dataframe
+    value: value we want to see if row contains
+
+    Return
+    ------
+    array
+        An integer array where each value is the row index of a row that contains the value
+
+    Example
+    -------
+
+    &gt;&gt;&gt; row0 = [&quot;&gt;&quot;, &quot;?&quot;, &quot;!&quot;]
+    ... df = pd.DataFrame([row0])
+    ... find_indices_with_value(df, &quot;?&quot;)
+    array([0])
+    &quot;&quot;&quot;
+
+
+    rows = []
+    for index, row in df.iterrows():
+        if value in row.unique():
+            rows.append(index)
+    return np.array(rows)
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [168]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>def chi_square_test(data, var1, var2, pairwise = False, alpha = 0.05):
+    &quot;&quot;&quot;Performs a chi-square test on two categorical variables, with one being group
+    If doing pairwise comparisions for groups, perform chi-square test on each pair.
+    Displays contigency tables (in percents) that are statistically significant.
+    If there are rows in the contigency with 0s, we delete these rows.
+
+    Parameters
+    ----------
+    data: Pandas Dataframe
+    var1: one categorical column of the data Dataframe
+    var2: one categorical column of the data Dataframe. In our case this will be the group column.
+    pairwise: if true, do pairwise comparisions.
+    alpha: significance level
+
+    Return
+    ------
+    if pairwise:
+        None
+    else:
+        rtn
+           A tuple where
+           the first value is the chi-square value
+           the second value is the p-value
+           the third value is the degrees of freedom
+           the fourth value is the expected counts
+
+    &quot;&quot;&quot;
+    cont_table = pd.crosstab(data[var1], data[var2])
+    if not pairwise:
+        missing_indices = find_indices_with_value(cont_table, 0)
+        cont_table = cont_table.drop(missing_indices)
+        chi2, p, df, exp = stats.chi2_contingency(cont_table)
+        if (p &lt; alpha):
+            print(&quot;statistically significant: %s&quot; % (tuple([var1, var2]), ))
+            print(&quot;p-value is &quot; + str(p))
+            display(cont_table.apply(lambda r: 100 * r/r.sum(), axis=0))
+
+        return chi2, p, df, exp
+    else:
+        pairs = [&quot;,&quot;.join(map(str, comb)).split(&quot;,&quot;) for comb in combinations(cont_table.columns, 2)]
+        for pair in pairs:
+            cont_table2 = cont_table[pair]
+            missing_indices = find_indices_with_value(cont_table2, 0)
+            cont_table2 = cont_table2.drop(missing_indices)
+
+            chi2, p, df, exp = stats.chi2_contingency(cont_table2)
+            if (p &lt; alpha):
+                print(&quot;statistically significant: %s&quot; % (tuple(pair), ))
+                print(&quot;p-value is &quot; + str(p))
+                display(cont_table2.apply(lambda r: 100 * r/r.sum(), axis=0))
+</pre></div>
+</div>
+</div>
+<p>Let’s first look at the relationship between occupation and sex. Note
+that we cannot make any huge conclusions from this since 85% of the
+individuals in the dataset are White, so sample size for other races are
+small (but still greater than 30).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [169]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>chi_square_test(clean_adult, &quot;occupation&quot;, &quot;sex&quot;);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;occupation&#39;, &#39;sex&#39;)
+p-value is 0.0
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>sex</th>
+      <th>Female</th>
+      <th>Male</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>25.679820</td>
+      <td>5.934907</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>2.208137</td>
+      <td>18.722694</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>11.684727</td>
+      <td>13.985568</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>0.664486</td>
+      <td>4.535860</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>1.676549</td>
+      <td>5.822002</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>5.551012</td>
+      <td>6.985420</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>17.971785</td>
+      <td>7.137598</td>
+    </tr>
+    <tr>
+      <th>Priv-house-serv</th>
+      <td>1.380086</td>
+      <td>0.039272</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>15.242282</td>
+      <td>12.503068</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>0.776937</td>
+      <td>2.788277</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>12.758127</td>
+      <td>11.467282</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>3.485995</td>
+      <td>2.803004</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>0.920057</td>
+      <td>7.275048</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>There is a clear association between sex and occupation. It seems like
+females are more likely to be in Administrative clerical and other
+services not explictly stated, while males are more likely to be in
+craft repair, handling/cleaning, farming/fishing, and transport. There
+does seem to be a difference in executive managerial roles, but it does
+not seem like the difference is huge.</p>
+<p>What about for race?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [170]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>chi_square_test(clean_adult, &quot;occupation&quot;, &quot;race&quot;, True);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Amer-Indian-Eskimo&#39;, &#39;Asian-Pac-Islander&#39;)
+p-value is 5.39804424413e-11
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Amer-Indian-Eskimo</th>
+      <th>Asian-Pac-Islander</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>10.877193</td>
+      <td>15.039282</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>15.438596</td>
+      <td>9.315376</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>10.526316</td>
+      <td>13.580247</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>3.508772</td>
+      <td>1.795735</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>7.719298</td>
+      <td>2.469136</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>6.666667</td>
+      <td>5.611672</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>11.578947</td>
+      <td>13.131313</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>11.578947</td>
+      <td>19.753086</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>2.807018</td>
+      <td>1.571268</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>9.122807</td>
+      <td>10.774411</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>1.403509</td>
+      <td>4.713805</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>8.771930</td>
+      <td>2.244669</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Amer-Indian-Eskimo&#39;, &#39;Black&#39;)
+p-value is 4.29464358621e-07
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Amer-Indian-Eskimo</th>
+      <th>Black</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>10.839161</td>
+      <td>17.204301</td>
+    </tr>
+    <tr>
+      <th>Armed-Forces</th>
+      <td>0.349650</td>
+      <td>0.035842</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>15.384615</td>
+      <td>8.387097</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>10.489510</td>
+      <td>8.422939</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>3.496503</td>
+      <td>1.505376</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>7.692308</td>
+      <td>6.093190</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>6.643357</td>
+      <td>9.641577</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>11.538462</td>
+      <td>19.820789</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>11.538462</td>
+      <td>8.100358</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>2.797203</td>
+      <td>3.512545</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>9.090909</td>
+      <td>8.888889</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>1.398601</td>
+      <td>2.401434</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>8.741259</td>
+      <td>5.985663</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Amer-Indian-Eskimo&#39;, &#39;Other&#39;)
+p-value is 0.00793749750909
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Amer-Indian-Eskimo</th>
+      <th>Other</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>10.877193</td>
+      <td>10.087719</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>15.438596</td>
+      <td>10.964912</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>10.526316</td>
+      <td>4.824561</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>3.508772</td>
+      <td>4.824561</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>7.719298</td>
+      <td>4.824561</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>6.666667</td>
+      <td>17.105263</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>11.578947</td>
+      <td>16.228070</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>11.578947</td>
+      <td>12.280702</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>2.807018</td>
+      <td>2.192982</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>9.122807</td>
+      <td>9.649123</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>1.403509</td>
+      <td>1.315789</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>8.771930</td>
+      <td>5.701754</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Amer-Indian-Eskimo&#39;, &#39;White&#39;)
+p-value is 0.000523857680953
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Amer-Indian-Eskimo</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>10.839161</td>
+      <td>11.822336</td>
+    </tr>
+    <tr>
+      <th>Armed-Forces</th>
+      <td>0.349650</td>
+      <td>0.027107</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>15.384615</td>
+      <td>14.110905</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>10.489510</td>
+      <td>13.921159</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>3.496503</td>
+      <td>3.523854</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>7.692308</td>
+      <td>4.356413</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>6.643357</td>
+      <td>6.153191</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>11.538462</td>
+      <td>9.572491</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>11.538462</td>
+      <td>13.843711</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>2.797203</td>
+      <td>2.009758</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>9.090909</td>
+      <td>12.360595</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>1.398601</td>
+      <td>3.082404</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>8.741259</td>
+      <td>5.216078</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Asian-Pac-Islander&#39;, &#39;Black&#39;)
+p-value is 2.08005869185e-35
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Asian-Pac-Islander</th>
+      <th>Black</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>14.972067</td>
+      <td>17.045455</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>9.273743</td>
+      <td>8.309659</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>13.519553</td>
+      <td>8.345170</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>1.787709</td>
+      <td>1.491477</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>2.458101</td>
+      <td>6.036932</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>5.586592</td>
+      <td>9.552557</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>13.072626</td>
+      <td>19.637784</td>
+    </tr>
+    <tr>
+      <th>Priv-house-serv</th>
+      <td>0.446927</td>
+      <td>0.958807</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>19.664804</td>
+      <td>8.025568</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>1.564246</td>
+      <td>3.480114</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>10.726257</td>
+      <td>8.806818</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>4.692737</td>
+      <td>2.379261</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>2.234637</td>
+      <td>5.930398</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Asian-Pac-Islander&#39;, &#39;Other&#39;)
+p-value is 1.10595148479e-11
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Asian-Pac-Islander</th>
+      <th>Other</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>14.972067</td>
+      <td>9.956710</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>9.273743</td>
+      <td>10.822511</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>13.519553</td>
+      <td>4.761905</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>1.787709</td>
+      <td>4.761905</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>2.458101</td>
+      <td>4.761905</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>5.586592</td>
+      <td>16.883117</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>13.072626</td>
+      <td>16.017316</td>
+    </tr>
+    <tr>
+      <th>Priv-house-serv</th>
+      <td>0.446927</td>
+      <td>1.298701</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>19.664804</td>
+      <td>12.121212</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>1.564246</td>
+      <td>2.164502</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>10.726257</td>
+      <td>9.523810</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>4.692737</td>
+      <td>1.298701</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>2.234637</td>
+      <td>5.627706</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Asian-Pac-Islander&#39;, &#39;White&#39;)
+p-value is 7.82321814761e-15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Asian-Pac-Islander</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>14.972067</td>
+      <td>11.775823</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>9.273743</td>
+      <td>14.055388</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>13.519553</td>
+      <td>13.866389</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>1.787709</td>
+      <td>3.509990</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>2.458101</td>
+      <td>4.339273</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>5.586592</td>
+      <td>6.128982</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>13.072626</td>
+      <td>9.534830</td>
+    </tr>
+    <tr>
+      <th>Priv-house-serv</th>
+      <td>0.446927</td>
+      <td>0.420427</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>19.664804</td>
+      <td>13.789246</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>1.564246</td>
+      <td>2.001851</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>10.726257</td>
+      <td>12.311965</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>4.692737</td>
+      <td>3.070277</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>2.234637</td>
+      <td>5.195557</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Black&#39;, &#39;Other&#39;)
+p-value is 1.08587334985e-05
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Black</th>
+      <th>Other</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>17.045455</td>
+      <td>9.956710</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>8.309659</td>
+      <td>10.822511</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>8.345170</td>
+      <td>4.761905</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>1.491477</td>
+      <td>4.761905</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>6.036932</td>
+      <td>4.761905</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>9.552557</td>
+      <td>16.883117</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>19.637784</td>
+      <td>16.017316</td>
+    </tr>
+    <tr>
+      <th>Priv-house-serv</th>
+      <td>0.958807</td>
+      <td>1.298701</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>8.025568</td>
+      <td>12.121212</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>3.480114</td>
+      <td>2.164502</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>8.806818</td>
+      <td>9.523810</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>2.379261</td>
+      <td>1.298701</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>5.930398</td>
+      <td>5.627706</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Black&#39;, &#39;White&#39;)
+p-value is 1.10592086605e-131
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Black</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>17.039404</td>
+      <td>11.772645</td>
+    </tr>
+    <tr>
+      <th>Armed-Forces</th>
+      <td>0.035499</td>
+      <td>0.026993</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>8.306709</td>
+      <td>14.051594</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>8.342208</td>
+      <td>13.862646</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>1.490948</td>
+      <td>3.509043</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>6.034789</td>
+      <td>4.338102</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>9.549166</td>
+      <td>6.127328</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>19.630813</td>
+      <td>9.532256</td>
+    </tr>
+    <tr>
+      <th>Priv-house-serv</th>
+      <td>0.958466</td>
+      <td>0.420314</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>8.022719</td>
+      <td>13.785524</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>3.478878</td>
+      <td>2.001311</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>8.803692</td>
+      <td>12.308641</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>2.378417</td>
+      <td>3.069448</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>5.928293</td>
+      <td>5.194154</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Other&#39;, &#39;White&#39;)
+p-value is 8.67474040807e-12
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Other</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Adm-clerical</th>
+      <td>9.956710</td>
+      <td>11.775823</td>
+    </tr>
+    <tr>
+      <th>Craft-repair</th>
+      <td>10.822511</td>
+      <td>14.055388</td>
+    </tr>
+    <tr>
+      <th>Exec-managerial</th>
+      <td>4.761905</td>
+      <td>13.866389</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>4.761905</td>
+      <td>3.509990</td>
+    </tr>
+    <tr>
+      <th>Handlers-cleaners</th>
+      <td>4.761905</td>
+      <td>4.339273</td>
+    </tr>
+    <tr>
+      <th>Machine-op-inspct</th>
+      <td>16.883117</td>
+      <td>6.128982</td>
+    </tr>
+    <tr>
+      <th>Other-service</th>
+      <td>16.017316</td>
+      <td>9.534830</td>
+    </tr>
+    <tr>
+      <th>Priv-house-serv</th>
+      <td>1.298701</td>
+      <td>0.420427</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>12.121212</td>
+      <td>13.789246</td>
+    </tr>
+    <tr>
+      <th>Protective-serv</th>
+      <td>2.164502</td>
+      <td>2.001851</td>
+    </tr>
+    <tr>
+      <th>Sales</th>
+      <td>9.523810</td>
+      <td>12.311965</td>
+    </tr>
+    <tr>
+      <th>Tech-support</th>
+      <td>1.298701</td>
+      <td>3.070277</td>
+    </tr>
+    <tr>
+      <th>Transport-moving</th>
+      <td>5.627706</td>
+      <td>5.195557</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Wow! All races are statistically different from each other in
+occupation.</p>
+<p>Let’s also look at the relationship between sex and race. Since our
+dataset is composed of people in the labor force, this will answer
+whether different races have different proportions of sexes
+participating in the labor force.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [171]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>chi_square_test(clean_adult, &quot;sex&quot;, &quot;race&quot;, True);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Amer-Indian-Eskimo&#39;, &#39;Black&#39;)
+p-value is 0.000101308693717
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Amer-Indian-Eskimo</th>
+      <th>Black</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Female</th>
+      <td>37.412587</td>
+      <td>49.662762</td>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <td>62.587413</td>
+      <td>50.337238</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Amer-Indian-Eskimo&#39;, &#39;White&#39;)
+p-value is 0.0131118233873
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Amer-Indian-Eskimo</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Female</th>
+      <td>37.412587</td>
+      <td>30.443836</td>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <td>62.587413</td>
+      <td>69.556164</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Asian-Pac-Islander&#39;, &#39;Black&#39;)
+p-value is 1.96539129404e-18
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Asian-Pac-Islander</th>
+      <th>Black</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Female</th>
+      <td>32.849162</td>
+      <td>49.662762</td>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <td>67.150838</td>
+      <td>50.337238</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Black&#39;, &#39;Other&#39;)
+p-value is 0.000582810354601
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Black</th>
+      <th>Other</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Female</th>
+      <td>49.662762</td>
+      <td>37.662338</td>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <td>50.337238</td>
+      <td>62.337662</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Black&#39;, &#39;White&#39;)
+p-value is 4.11990122916e-95
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Black</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Female</th>
+      <td>49.662762</td>
+      <td>30.443836</td>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <td>50.337238</td>
+      <td>69.556164</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;Other&#39;, &#39;White&#39;)
+p-value is 0.0214225449555
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>race</th>
+      <th>Other</th>
+      <th>White</th>
+    </tr>
+    <tr>
+      <th>sex</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Female</th>
+      <td>37.662338</td>
+      <td>30.443836</td>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <td>62.337662</td>
+      <td>69.556164</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>The Black population seems to differ significantly from the other race
+populations, which is not surprising, since they have a 50/50 male to
+female labor participation, while other races seem to be around 60/40 or
+70/30.</p>
+<p>Finally, since we mentioned before that education might be a confounding
+variable, let’s see if there is a relationship between occupation and
+education.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [172]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>chi_square_test(clean_adult,&quot;occupation&quot;, &quot;education&quot;);
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+statistically significant: (&#39;occupation&#39;, &#39;education&#39;)
+p-value is 0.0
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>education</th>
+      <th>10th</th>
+      <th>11th</th>
+      <th>12th</th>
+      <th>1st-4th</th>
+      <th>5th-6th</th>
+      <th>7th-8th</th>
+      <th>9th</th>
+      <th>Assoc-acdm</th>
+      <th>Assoc-voc</th>
+      <th>Bachelors</th>
+      <th>Doctorate</th>
+      <th>HS-grad</th>
+      <th>Masters</th>
+      <th>Preschool</th>
+      <th>Prof-school</th>
+      <th>Some-college</th>
+    </tr>
+    <tr>
+      <th>occupation</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Craft-repair</th>
+      <td>75.813953</td>
+      <td>75.217391</td>
+      <td>68.75</td>
+      <td>51.111111</td>
+      <td>52.564103</td>
+      <td>59.042553</td>
+      <td>75.000000</td>
+      <td>43.181818</td>
+      <td>52.765957</td>
+      <td>12.514221</td>
+      <td>0.655738</td>
+      <td>75.128306</td>
+      <td>2.470588</td>
+      <td>28.571429</td>
+      <td>1.541850</td>
+      <td>58.799172</td>
+    </tr>
+    <tr>
+      <th>Farming-fishing</th>
+      <td>20.000000</td>
+      <td>16.086957</td>
+      <td>20.00</td>
+      <td>40.000000</td>
+      <td>46.153846</td>
+      <td>36.702128</td>
+      <td>22.580645</td>
+      <td>5.303030</td>
+      <td>11.063830</td>
+      <td>4.379977</td>
+      <td>0.327869</td>
+      <td>15.831030</td>
+      <td>1.176471</td>
+      <td>64.285714</td>
+      <td>0.881057</td>
+      <td>12.008282</td>
+    </tr>
+    <tr>
+      <th>Prof-specialty</th>
+      <td>4.186047</td>
+      <td>8.695652</td>
+      <td>11.25</td>
+      <td>8.888889</td>
+      <td>1.282051</td>
+      <td>4.255319</td>
+      <td>2.419355</td>
+      <td>51.515152</td>
+      <td>36.170213</td>
+      <td>83.105802</td>
+      <td>99.016393</td>
+      <td>9.040663</td>
+      <td>96.352941</td>
+      <td>7.142857</td>
+      <td>97.577093</td>
+      <td>29.192547</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Just as expected!</p>
+<p>Thus, we saw that there is a statistically significant relationship
+between sex and occupation and also between race and occupation.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">p3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Analysis:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="demographics-p1.html">Cleaning the Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demographics-p1.html#Testing-Section">Testing Section</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Sex, Race, and Occupation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demographics-p3.html">Sex, Race, and Education</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demographics-p3.html#Testing-Section">Testing Section</a></li>
+<li class="toctree-l1"><a class="reference internal" href="demographics-p4.html">Age, Hours Per Week, and Education</a></li>
+<li class="toctree-l1"><a class="reference internal" href="proposal.html">Proposal</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="demographics-p1.html" title="previous chapter">Cleaning the Data</a></li>
+      <li>Next: <a href="demographics-p3.html" title="next chapter">Sex, Race, and Education</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Aaron Ou.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/demographics-p2.ipynb.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
